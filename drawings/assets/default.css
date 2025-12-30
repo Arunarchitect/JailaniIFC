@@ -31,24 +31,26 @@ text, tspan {
 .annotation {
     fill: none;
     stroke: rgb(124, 124, 123);
-    stroke-opacity: 0.6;      /* 0 = invisible, 1 = fully opaque */
+    stroke-opacity: 0.6;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 0.25;
 }
+
 .IfcAnnotation {
     fill: none;
     stroke: rgb(124, 124, 123);
-    stroke-opacity: 0.6;      /* 0 = invisible, 1 = fully opaque */
+    stroke-opacity: 0.6;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 0.25;
 }
 
 .IfcFurniture {
-    fill: none;
+    fill: rgb(242, 222, 165);
+    fill-opacity: 0.724;
     stroke: rgb(124, 124, 123);
-    stroke-opacity: 0.6;      /* 0 = invisible, 1 = fully opaque */
+    stroke-opacity: 0.6;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 0.25;
@@ -73,7 +75,7 @@ text, tspan {
 }
 
 .IfcSanitaryTerminal {
-    fill: none;
+    fill: rgb(255, 255, 255);
     stroke: rgb(124, 124, 123);
     stroke-opacity: 0.6;
     stroke-linecap: round;
@@ -81,7 +83,33 @@ text, tspan {
     stroke-width: 0.25;
 }
 
+.IfcSlab {
+    fill: rgb(241, 236, 226);
+    stroke: rgb(124, 124, 123);
+    stroke-opacity: 0.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 0.25;
+}
 
+.material-blank { 
+    fill: rgb(242, 222, 165);
+    fill-opacity: 0.724;
+    stroke: rgb(124, 124, 123);
+    stroke-opacity: 0.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 0.25;
+}
+
+.material-stair { 
+    fill: rgb(241, 236, 226);
+    stroke: rgb(124, 124, 123);
+    stroke-opacity: 0.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 0.25;
+}
 
 
 
@@ -125,7 +153,7 @@ text.large, tspan.large { /* 3.5mm */ font-size: 5.78px; }
 text.regular, tspan.regular { /* 2.5mm */ font-size: 4.13px; }
 text.small, tspan.small { /* 1.8mm */ font-size: 2.97px; }
 text.GRID, tspan.GRID { /* 5mm */ font-size: 8.25px; }
-.material-blank { fill: white; }
+
 .material-blackwater { fill: white; stroke: violet; stroke-width: 0.5; }
 .material-hotwater { fill: white; stroke: red; stroke-width: 0.5; }
 .material-coldwater { fill: white; stroke: blue; stroke-width: 0.5; }
@@ -153,9 +181,11 @@ text.GRID, tspan.GRID { /* 5mm */ font-size: 8.25px; }
 .PredefinedType-CONCRETE { fill: url(#concrete); stroke: black; stroke-width: 0.5; }
 .PredefinedType-PLASTERBOARD { fill: url(#sand); stroke: black; stroke-width: 0.25; }
 .IfcReinforcingBar { fill: none; stroke: rgb(255, 0, 0); stroke-linecap: 'round'; stroke-width: 2; }
+
+
 .IfcCovering {
-  fill: none;
-  stroke: #000;
-  stroke-width: 0.25;
-  stroke-dasharray: 1 0.5;
-}
+    fill: rgb(240, 238, 234);
+    stroke: #000;
+    stroke-width: 0.25;
+    stroke-dasharray: 2 1;
+} 
