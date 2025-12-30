@@ -19,7 +19,12 @@
  */
 
 * { stroke-linecap: round; stroke-linejoin: round; }
-text, tspan { /* 2.5mm */ fill: rgb(255, 0, 0); stroke: none; font-family: 'OpenGost Type B TT', 'DejaVu Sans Condensed', 'Liberation Sans', 'Arial Narrow', 'Arial'; font-size: 3px; }
+text, tspan {
+    fill: rgb(255, 0, 0);
+    stroke: none;
+    font-family: 'Roboto Light', 'Roboto', 'Arial', sans-serif;
+    font-size: 3px;
+}
 .cut { fill: black; stroke: black; stroke-linecap: 'round'; stroke-width: 0.35; fill-rule: evenodd; }
 .projection { fill: white; stroke: black; stroke-linecap: 'round'; stroke-width: 0.25; }
 .surface { stroke: none; fill: #fff; fill-rule: evenodd; }
