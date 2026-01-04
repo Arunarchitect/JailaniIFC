@@ -111,6 +111,12 @@ text, tspan {
     stroke-width: 0.25;
 }
 
+.material-porch { 
+    fill: rgb(240, 238, 234);
+    stroke: #000;
+    stroke-width: 0.25;
+    stroke-dasharray: 2 1;
+}
 
 
 
