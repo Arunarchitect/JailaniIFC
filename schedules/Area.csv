@@ -1,7 +1,0 @@
-Index,Identification,Name,Quantity,Unit,Contract,Value,Material Rate,Labor Rate,Subtotal,Property,Query
-1,1,All Area,,m2,,,,,,NetArea,"IfcSlab, location=""GF"" + IfcSlab, location=""Concept"" + IfcSlab, location=""Area"""
-1,2.1,Ground Floor,,m2,,,,,,NetArea,"IfcSlab, location=""GF"""
-1,2.2,First Floor,,m2,,,,,,NetArea,"IfcSlab, location=""Area"""
-1,2.3,Verandah,,m2,,,,,,NetArea,"IfcSlab, location=""Concept"""
-1,2.4,External buildings,,m2,,,,,,NetArea,"IfcSlab, location=""Existing"""
-1,2.4,Car Porch,,m2,,,,,,NetArea,"IfcSlab, location=""Car Porch"""
