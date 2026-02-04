@@ -118,6 +118,14 @@ text, tspan {
     stroke-dasharray: 2 1;
 }
 
+.material-human { 
+    fill: rgb(241, 236, 226);
+    stroke: rgb(124, 124, 123);
+    stroke-opacity: 0.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 0.25;
+}
 
 
 
