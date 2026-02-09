@@ -92,6 +92,15 @@ text, tspan {
     stroke-width: 0.25;
 }
 
+.material-tile {
+    fill: rgb(241, 236, 226);
+    stroke: rgb(124, 124, 123);
+    stroke-opacity: 0.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 0.25;
+}
+
 .material-blank { 
     fill: rgb(242, 222, 165);
     fill-opacity: 0.724;
