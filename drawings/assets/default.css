@@ -141,7 +141,9 @@ text, tspan {
 
 
 
-.IfcGeographicElement { fill: none; stroke: black; stroke-linecap: 'round'; stroke-width: 1; }
+.material-nofill { fill:  rgb(140, 101, 69); stroke: none; stroke-linecap: 'round'; stroke-width: 1; }
+.material-fill { fill:  rgb(236, 193, 158); stroke: none; stroke-linecap: 'round'; stroke-width: 1; }
+
 .PredefinedType-LINEWORK { stroke: black; stroke-width: 0.25; }
 .PredefinedType-LINEWORK.dashed { stroke-dasharray: 3, 2; }
 .PredefinedType-LINEWORK.fine { stroke-width: 0.18; stroke: #777777; }
