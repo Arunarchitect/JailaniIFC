@@ -19,12 +19,14 @@
  */
 
 * { stroke-linecap: round; stroke-linejoin: round; }
-text, tspan { /* 2.5mm */ fill: rgb(255, 0, 0); stroke: none; font-family: 'OpenGost Type B TT', 'DejaVu Sans Condensed', 'Liberation Sans', 'Arial Narrow', 'Arial'; font-size: 3px; }
+text, tspan { /* 2.5mm */ fill: black; stroke: none; font-family: 'OpenGost Type B TT', 'DejaVu Sans Condensed', 'Liberation Sans', 'Arial Narrow', 'Arial'; font-size: 4.13px; }
+a text, a tspan {  fill: blue !important;  text-decoration: underline;}
+a:hover { cursor: pointer; }
 .cut { fill: black; stroke: black; stroke-linecap: 'round'; stroke-width: 0.35; fill-rule: evenodd; }
 .projection { fill: white; stroke: black; stroke-linecap: 'round'; stroke-width: 0.25; }
 .surface { stroke: none; fill: #fff; fill-rule: evenodd; }
-.annotation { fill: none; stroke: rgb(0, 26, 255); stroke-linecap: 'round'; stroke-width: 0.25; }
-.IfcAnnotation { fill: none; stroke: rgb(0, 38, 255); stroke-linecap: 'round'; stroke-width: 0.25; }
+.annotation { fill: none; stroke: black; stroke-linecap: 'round'; stroke-width: 0.25; }
+.IfcAnnotation { fill: none; stroke: black; stroke-linecap: 'round'; stroke-width: 0.25; }
 .IfcGeographicElement { fill: none; stroke: black; stroke-linecap: 'round'; stroke-width: 1; }
 .PredefinedType-LINEWORK { stroke: black; stroke-width: 0.25; }
 .PredefinedType-LINEWORK.dashed { stroke-dasharray: 3, 2; }
@@ -61,10 +63,6 @@ text.regular, tspan.regular { /* 2.5mm */ font-size: 4.13px; }
 text.small, tspan.small { /* 1.8mm */ font-size: 2.97px; }
 text.GRID, tspan.GRID { /* 5mm */ font-size: 8.25px; }
 .material-blank { fill: white; }
-.material-blackwater { fill: white; stroke: violet; stroke-width: 0.5; }
-.material-hotwater { fill: white; stroke: red; stroke-width: 0.5; }
-.material-coldwater { fill: white; stroke: blue; stroke-width: 0.5; }
-.material-graywater { fill: white; stroke: gray; stroke-width: 0.5; }
 .material-diagonal1 { fill: url(#diagonal1); }
 .material-diagonal2 { fill: url(#diagonal2); }
 .material-diagonal3 { fill: url(#diagonal3); }
@@ -72,8 +70,6 @@ text.GRID, tspan.GRID { /* 5mm */ font-size: 8.25px; }
 .material-crosshatch2 { fill: url(#crosshatch2); }
 .material-crosshatch3 { fill: url(#crosshatch3); }
 .material-brick { fill: url(#brick); }
-.material-brick2 { fill: url(#brick2); }
-.material-randomrubble { fill: url(#randomrubble); }
 .material-earth { fill: url(#earth); }
 .material-glass { fill: url(#glass); }
 .material-liquid { fill: url(#liquid); }
