@@ -366,7 +366,7 @@
             "scene.render.preview_pixel_size": "AUTO",
             "scene.render.resolution_percentage": 100,
             "scene.render.resolution_x": 1984,
-            "scene.render.resolution_y": 991,
+            "scene.render.resolution_y": 1322,
             "scene.render.sequencer_gl_preview": "SOLID",
             "scene.render.simplify_child_particles": 1.0,
             "scene.render.simplify_child_particles_render": 1.0,
@@ -425,12 +425,12 @@
             "scene.view_settings.use_curve_mapping": false,
             "scene.view_settings.use_white_balance": false,
             "scene.view_settings.view_transform": "Standard",
-            "scene.view_settings.white_balance_temperature": 6500.19189453125,
-            "scene.view_settings.white_balance_tint": 9.999767303466797,
+            "scene.view_settings.white_balance_temperature": 6500.2099609375,
+            "scene.view_settings.white_balance_tint": 9.999751091003418,
             "scene.view_settings.white_balance_whitepoint": [
-                0.9992885589599609,
+                0.9992875456809998,
                 1.0003505945205688,
-                0.9986093044281006
+                0.9986125230789185
             ],
             "scene.display.shading.aov_name": "",
             "scene.display.shading.background_color": [
@@ -592,7 +592,7 @@
             "space.overlay.vertex_paint_mode_opacity": 1.0,
             "space.overlay.viewer_attribute_opacity": 1.0,
             "space.overlay.weight_paint_mode_opacity": 1.0,
-            "space.overlay.wireframe_opacity": 1.0,
+            "space.overlay.wireframe_opacity": 0.1746031790971756,
             "space.overlay.wireframe_threshold": 0.0,
             "space.overlay.xray_alpha_bone": 0.0,
             "space.shading.aov_name": "",
@@ -629,9 +629,9 @@
                 0.800000011920929
             ],
             "space.shading.studio_light": "forest.exr",
-            "space.shading.studiolight_background_alpha": 1.0,
-            "space.shading.studiolight_background_blur": 0.027272701263427734,
-            "space.shading.studiolight_intensity": 1.2363636493682861,
+            "space.shading.studiolight_background_alpha": 0.6545454859733582,
+            "space.shading.studiolight_background_blur": 0.6227272748947144,
+            "space.shading.studiolight_intensity": 0.7090910077095032,
             "space.shading.studiolight_rotate_z": 0.0,
             "space.shading.type": "MATERIAL",
             "space.shading.use_compositor": "DISABLED",
