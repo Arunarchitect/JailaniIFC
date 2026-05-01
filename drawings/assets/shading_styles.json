@@ -41,8 +41,8 @@
             "scene.render.ppm_factor": 72.0,
             "scene.render.preview_pixel_size": "AUTO",
             "scene.render.resolution_percentage": 100,
-            "scene.render.resolution_x": 3248,
-            "scene.render.resolution_y": 1416,
+            "scene.render.resolution_x": 1175,
+            "scene.render.resolution_y": 818,
             "scene.render.sequencer_gl_preview": "SOLID",
             "scene.render.simplify_child_particles": 1.0,
             "scene.render.simplify_child_particles_render": 1.0,
@@ -58,7 +58,7 @@
             "scene.render.simplify_volumes": 1.0,
             "scene.render.stamp_font_size": 12,
             "scene.render.stamp_note_text": "",
-            "scene.render.threads": 16,
+            "scene.render.threads": 12,
             "scene.render.threads_mode": "AUTO",
             "scene.render.use_border": false,
             "scene.render.use_compositing": true,
@@ -101,12 +101,12 @@
             "scene.view_settings.use_curve_mapping": false,
             "scene.view_settings.use_white_balance": false,
             "scene.view_settings.view_transform": "Standard",
-            "scene.view_settings.white_balance_temperature": 6500.16650390625,
-            "scene.view_settings.white_balance_tint": 9.999714851379395,
+            "scene.view_settings.white_balance_temperature": 6500.17333984375,
+            "scene.view_settings.white_balance_tint": 9.999678611755371,
             "scene.view_settings.white_balance_whitepoint": [
-                0.9992913603782654,
-                1.0003501176834106,
-                0.9986059069633484
+                0.9992906451225281,
+                1.0003502368927002,
+                0.9986068606376648
             ],
             "scene.display.shading.aov_name": "",
             "scene.display.shading.background_color": [
