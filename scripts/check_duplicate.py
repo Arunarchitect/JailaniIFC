@@ -6,6 +6,11 @@ Check a list of IFC GlobalIds for:
      within a tolerance of each other (e.g. duplicates stacked on
      top of one another)
 
+If duplicates are found, they are also printed as comma-separated
+SETS: Set 1 = first element of every group, Set 2 = second element
+of every group, Set 3 = third (only if some group has 3+), etc.
+Keep Set 1, search/select Set 2+ (paste into Bonsai search) and delete.
+
 USAGE
 - If the file is currently open in Bonsai: just run this in Blender's
   Text Editor, it uses the live model.
@@ -27,7 +32,7 @@ SOURCE_PATH = r""   # only used when not running inside Bonsai
 
 # Option A: paste GlobalIds directly, comma/newline separated, no quotes.
 GLOBAL_IDS_RAW = """
-3vRSHD2T9AM8gZzgZsMvA2,0F8rjSor14AvP6b_oX77FF,2niFQd8cz689rC3yPADnD9,2_ogrHrQ16wQszzZQ4$1Js,1i8egTi9j6RwJAWc8wVS85,0OuT1jbUz46xk4hUQSKXnh,36qXah_Xj8r84Tdfd7AsFh,3aT02EmLf0hBae7r_s0agw,3lKDDAQDT6gerYdKa7axVW,0ddXiuRnLAJe_5wmjnMdM7,29PWW3qgDBDhQqLg2SzK40,2FQucbqhv8AhQbn$lqQ_T_
+2aoiAZmMTEsO42I3Sp16Xq,3oG4nCoz56jRXDofkW3Npz,1oYDh1Suv95gB5S0DXz9vv,1P0WpONsL2_fIgdDm4$tJi,1OnefPYsjDgAzknMxfkDAv,2xHvwjNvD49wH2Eb$itxU2,2mkgtyuR13ugGYX$5ld0jx,1K41Hk5Vn8jOcLb_phdXpm,3ZWA5acMT3iRb$zzawHHeL,0wqLQLyFr3J9HMtPmbEIh9,2wq0RaKEjAq8euRAk15fbe,3u1ye5Obj4CAmPf$C9OYi_,3cB9c2Zan92uJ8xofJqBEn,1kZ6arMArE$9y9yZJ4GHr0,20AGRrGGj80gr6A0T4jVcD,3Plz$VqHz1TwmYGwoMmAAs,12swJzLLH4_ANk1ONmui5M,3H1HuE4IvB1h_3F4F7Lm0e,2F7pFQM9fETARVOBt1J95Q,0VkbIo1A12aBmKXQxbogGf,2kYcCA5uf3DQIxlH4mQAXs,0zWZptiqz7X8rMh5CZiVrx,1kbHomPrX9jemvndvLu4R1,2mDlwRAUL1Sfu1jTYYReCt,1DowydeJ1ELgXVJ172Vzbz,1XN4oGVQvEKvbsHcSlGtkB,2umq$cZgz3oxMnjGyK3iq1,3xq3kOo9TAOedjyUbcPm5o,0FeV5qzKT4TRdT7u9pBOJb,0ktzV6uQbEwgZxEIvBrjVK,3PEiNYjcPDbwTu1P1y5Kkx,0mELnxbUzAs9pBe_PR9izm,2b$yie90vAr8Iz73ZSv3$K,0LuzcCMm53v9fCKeBSKf9R,1YnGETroHElA8rmJ_077a1,2Pi$KcTUvC395wxTc_Rxtb,0vFIv3B$zFGwHRdFBpZ46i,2mbtAgrUH3q8t5Pm33jGPL,1GoDiVvC9BnhyltlAMvle7,2YnYomgLbBlOedDehn9IMs,2KkI7mlRn3kP5qwusELqFR,2AlMp_rrTB4Aq3N8A4pJBq,1EilNGP7b8Ngyg6LE5DvpN,2H3Rs3pMr739S5B2P66fWI,3zPVcC10T06ON_t9KcqqYi,3XajPGjrf0IPjkWnWqr9FQ,3701REA4XFGgNOKkUu9Z1R,0IlH5KzEj2oQKoZcfl92kM,34wrX0d5v3jPGWb1TdBPmD,16i55JdbjBDgzx2H01IEE1,1mQ90d1S9859tX1zdYXOc0,10jGdX9h9DjxAQK$b9BELk,1BJuE8zF52IReVmUWByoKv,3lu5CWP1HFEAGLKDOUPP5B,0iveiZoNz048_yqdK95blk,1PFbuGSNr05RacGmJuZ7cP,188SetLv132xnFR8PDRqRY,3QLvYWFDP1NuiiQeFJZvFX,0eoXyhI6HCmAm5mYsvFKRX,24UfnUgcDDaepgAJ6MerLe,3IrQkOgFnD9uMa1BD5TJdv,33CmBKeCnALvE0u4yGk4l8,2azprbCMvD4BzlXYJmQi8T,2ySxDAwfr6rBZiyJMnyvI2,01sQChoL18w86THdB66riM,3Q_0Mm9r93mPvOdIA7Gu8C,0kQcsmw6DAew6jTLWvFLHo,05C9CJcbv8yhpwDmPkRDjA,340BjcpT9F4AO9F5p9txJ8,1sQc$BbMf2Hhtu$Nsco270,1scujomCHCGg5R0HDLd1Mj,2_8uoZdgP7QP92oUNvETbk,2uTq5V3tjDchBF10ZCzDs0,01eSte5q55q9LfIjViXjQJ,1RNj8vc3r1Xx$jyfNpG1wh,0Aplg5a857putqNCno9poP,1k$cgL6cX3QxxDF_xttM7N,01vc774Bj9AOETurqIabVL,3ZRAr0s7X55xNLmxckXWnS,1hANyzXYX6ohXsyIeaQnek,3HXFjhp195pvCzQNLf61n$,1GAiwNAQXC$BQFk_vGg5FN,1_l653Gkb6Ye$g_5c8RbIX,3_7$fC6WD01Qf6Ckzdlg$K,1FoQjWDsbC3A_EM7ibfFGg
 """
 
 # Option B: read GlobalIds from a CSV file instead. Leave CSV_PATH empty
@@ -35,7 +40,7 @@ GLOBAL_IDS_RAW = """
 CSV_PATH = r""
 CSV_COLUMN = "GlobalId"   # column header name, or an integer index like 0
 
-POSITION_TOLERANCE = 0.05   # meters -- centers within this distance are "same position"
+POSITION_TOLERANCE = 0.0001   # meters -- centers within this distance are "same position"
 
 
 def get_file():
@@ -122,7 +127,8 @@ def distance(a, b):
 def cluster_by_position(items, tolerance):
     """items: list of (guid, center). Returns list of clusters (each a
     list of guids) where every member is within `tolerance` of at
-    least one other member (simple union-find style clustering)."""
+    least one other member (simple union-find style clustering).
+    Member order inside a cluster follows the input order."""
     n = len(items)
     parent = list(range(n))
 
@@ -147,6 +153,18 @@ def cluster_by_position(items, tolerance):
         groups[find(i)].append(items[i][0])
 
     return [g for g in groups.values() if len(g) > 1]
+
+
+def build_duplicate_sets(clusters):
+    """Set k = k-th member of every cluster that has at least k members.
+    Set 1 = the ones to keep, Set 2+ = the ones to delete."""
+    if not clusters:
+        return []
+    max_n = max(len(c) for c in clusters)
+    sets = []
+    for k in range(max_n):
+        sets.append([c[k] for c in clusters if len(c) > k])
+    return sets
 
 
 def main():
@@ -212,6 +230,18 @@ def main():
                 name = getattr(el, "Name", None) or "Unnamed"
                 log.append(f"    {el.is_a():20s} {name:25s} {g}")
     log.append("")
+
+    # ---- Comma-separated duplicate sets (copy -> search -> delete) ----
+    if clusters:
+        dup_sets = build_duplicate_sets(clusters)
+        log.append("== Duplicate sets (comma-separated, copy & search) ==")
+        log.append("Set 1 = keep.  Set 2+ = delete (one of each duplicate group).")
+        log.append("")
+        for k, s in enumerate(dup_sets, start=1):
+            role = "KEEP" if k == 1 else "DELETE"
+            log.append(f"Set {k} [{role}] ({len(s)} ids):")
+            log.append(",".join(s))
+            log.append("")
 
     text = "\n".join(log)
     print(text)
