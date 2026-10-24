@@ -48,7 +48,7 @@ text, tspan {
 
 .IfcFurniture {
     fill: rgb(234, 239, 246);
-    fill-opacity: .5;
+    fill-opacity: 1;
     stroke: rgb(62, 62, 61);
     stroke-opacity: 0.2;
     stroke-linecap: round;
