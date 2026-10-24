@@ -126,7 +126,7 @@ text, tspan {
 
 .IfcWall {
     fill: rgb(165, 201, 242);
-    fill-opacity: .9;
+    fill-opacity: .5;
     stroke: rgb(63, 144, 237);
     stroke-opacity: 0.6;
     stroke-linecap: round;
