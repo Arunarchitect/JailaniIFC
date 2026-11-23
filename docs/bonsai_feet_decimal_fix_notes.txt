@@ -1,0 +1,203 @@
+BONSAI: FEET - DECIMAL DIMENSION FIX - PR REFERENCE NOTES
+=========================================================
+
+Target repo : https://github.com/IfcOpenShell/IfcOpenShell
+File        : src/bonsai/bonsai/bim/module/drawing/helper.py
+Function    : format_distance()
+Tested on   : Bonsai installed in Blender 5.2 (local edit of installed copy)
+Installed at: C:\Users\intfo\AppData\Roaming\Blender Foundation\Blender\5.2\
+              extensions\.local\lib\python3.13\site-packages\bonsai\
+
+STATUS (be honest in the PR)
+----------------------------
+- The change is applied in the INSTALLED copy only, not yet in a git clone.
+- Not yet confirmed with a real before/after number. Do that before the PR
+  (see TEST PLAN).
+- The "why" below comes from reading the code, not from running it. Confirm
+  the old behaviour on an unpatched copy before claiming it in the PR.
+
+
+1. THE PROBLEM
+--------------
+BBIM_Dimension has a CustomUnit enum (Feet and Inches - Fractional,
+Feet - Decimal, Inches - Fractional, Inches - Decimal, Meters, Decimeters,
+Centimeters, Millimeters). Feet - Decimal showed wrong values.
+
+How custom_unit reaches format_distance (existing code, unchanged):
+    "Feet - Decimal": ("IMPERIAL", "FEET", False)
+    -> unit_system = "IMPERIAL", unit_length = "FEET", unit_fraction = False
+
+
+2. ROOT CAUSE (from reading the old code)
+-----------------------------------------
+Decimal units (unit_fraction == False) went through the SAME imperial block
+as the fractional units. That block is built for feet + inches + fraction.
+For Feet - Decimal it did this:
+
+  a) feet = round(decInches / 12, 3); decInches = 0
+  b) later: if not unit_fraction: inches = round(decInches, 3) -> 0 ; frac = None
+  c) the string builder then ran with feet=10.083, inches=0, frac=None:
+       - add_inches stays True unless SuppressZeroInches is set
+       - result looks like  10.083' - 0"   (feet decimal + a stray inches part)
+       - the line  `if inches > 0 or frac > 0 or feet == 0:`  compares
+         None > 0 -> TypeError in Python 3 when feet != 0 and inches == 0
+  d) decimal_places (DecimalPlaces in the drawing pset) was ignored for
+     imperial decimal; it was hard-coded to round(..., 3).
+  e) Inches - Decimal also used the fractional builder, and ignored
+     decimal_places.
+
+Also seen but NOT changed:
+  - negative values: decInches = abs(decInches) in the old block drops the
+    sign for inches (the new branch keeps the sign).
+
+
+3. WHAT I CHANGED (exactly)
+---------------------------
+Only helper.py, only format_distance(). One new branch was inserted, and the
+existing `if unit_system == "IMPERIAL":` became `elif`. Nothing inside the
+old imperial block or the metric block was touched.
+
+BEFORE:
+
+    value *= unit_scale
+    tx_dist = None
+
+    # Imperial Formatting
+    if unit_system == "IMPERIAL":
+        toInches = None
+        ...
+
+AFTER:
+
+    value *= unit_scale
+    tx_dist = None
+
+    # Decimal imperial (Feet - Decimal / Inches - Decimal)
+    if unit_system == "IMPERIAL" and not unit_fraction and not isArea:
+        if in_unit_length:
+            to_inches = 1 if unit_length == "INCHES" else 12
+        else:
+            to_inches = 39.3700787401574887
+        dec_inches = value * to_inches
+        if unit_length == "FEET":
+            number, symbol = dec_inches / 12, "'"
+        else:
+            number, symbol = dec_inches, '"'
+        places = 3 if decimal_places is None else decimal_places
+        number = round(number, places)
+        if number == 0:
+            number = 0.0  # avoid "-0.000"
+        tx_dist = f"{number:.{places}f}{symbol}"
+
+    # Imperial Formatting
+    elif unit_system == "IMPERIAL":
+        toInches = None
+        ...(unchanged)...
+
+Tidy-up for the PR: remove the duplicated "# Imperial Formatting" comment
+above the new comment, and indent the new comment to 4 spaces (my local copy
+has it at 8; harmless, but untidy).
+
+
+4. WHY THIS DESIGN
+------------------
+- Decimal output needs no feet/inches/fraction splitting, so it gets its own
+  small branch instead of patching flags inside the fractional builder.
+- Fractional units (Feet and Inches - Fractional, Inches - Fractional) and
+  the default IFC-unit path keep unit_fraction == True, so they never enter
+  the new branch -> no behaviour change for them.
+- Area (isArea) is excluded, so area formatting is untouched.
+- DecimalPlaces is now respected; default stays 3 places when unset.
+- `places = 3 if decimal_places is None` (not `if decimal_places`) so that
+  DecimalPlaces = 0 works.
+- Unit_scale / IFC project unit handling is unchanged: the custom unit
+  overrides the scene unit system, so the Blender scene does not need to be
+  set to Imperial.
+
+Expected output (assuming IFC/scene units give value in metres):
+    3.048 m, Feet - Decimal, DecimalPlaces unset -> 10.000'
+    3.048 m, Feet - Decimal, DecimalPlaces = 2   -> 10.00'
+    3.048 m, Inches - Decimal, DecimalPlaces = 1 -> 120.0"
+    0                                            -> 0.000'
+    -3.048 m, Feet - Decimal                     -> -10.000'
+(Verify these yourself; they are computed by hand, not from a test run.)
+
+
+5. TEST PLAN (do before the PR)
+-------------------------------
+Make a dimension annotation and set BBIM_Dimension > CustomUnit, then check
+BOTH the viewport text (decoration.py) and the drawing SVG output
+(svgwriter.py); both call format_distance.
+
+  [ ] Feet - Decimal, a known length (e.g. 3.048 m)
+  [ ] Feet - Decimal with DecimalPlaces 0, 1, 2, 3
+  [ ] Inches - Decimal
+  [ ] zero length and a negative length
+  [ ] Feet and Inches - Fractional unchanged
+  [ ] Inches - Fractional unchanged
+  [ ] Metric custom units unchanged
+  [ ] No custom unit set (scene/IFC unit) unchanged
+  [ ] Area dimensions unchanged
+  [ ] Scene Metric AND scene Imperial (should not matter for custom units)
+  [ ] IFC project in mm AND in m
+
+Also confirm custom_unit is actually passed into format_distance from
+decoration.py (format_value) and svgwriter.py. If a dimension ignores the
+CustomUnit completely, that is a separate bug in the call chain.
+
+
+6. NOT PART OF THIS PR
+----------------------
+- data.py line ~344 `assert element` in get_text_data(): this caused the
+  "VIEW3D_HT_tool_header.draw" console spam when the Annotation tool was
+  active with no IFC element selected. Local workaround only:
+      assert element   ->   if not element: return None
+  Separate issue. Report it separately if it still happens on the latest
+  Bonsai.
+- The old closed PR #5922 (theoryshaw, "Create dimensions with different
+  units") used a pset property named Unit_Primary and a unit_primary
+  argument. Current code uses CustomUnit / custom_unit, so that PR is not
+  directly applicable.
+
+
+7. PR STEPS
+-----------
+1. Fork IfcOpenShell on GitHub, clone your fork, add upstream remote.
+2. git fetch upstream; check which branch recent PRs target (do not assume
+   v0.8.0), then:
+   git checkout -b fix-feet-decimal upstream/<target-branch>
+3. Open the REPO's helper.py (not the installed copy). Compare
+   format_distance with your installed one; the repo may be newer. Re-apply
+   the new branch + the if -> elif change.
+4. Format: black -l 120 src/bonsai/bonsai/bim/module/drawing/helper.py
+5. Run the test plan; add a unit test if the repo has a pattern for
+   format_distance under src/bonsai/test/.
+6. git add, git commit -m "Fix Feet - Decimal and Inches - Decimal dimension
+   formatting", git push origin fix-feet-decimal
+7. Open the PR from your fork.
+8. Before submitting, search issues/PRs for "Feet - Decimal" / "custom unit"
+   in case it is already fixed.
+
+
+8. PR DESCRIPTION DRAFT
+-----------------------
+Title: Fix Feet - Decimal and Inches - Decimal dimension formatting
+
+Problem:
+Dimensions with CustomUnit = "Feet - Decimal" (and "Inches - Decimal") show
+incorrect text. Decimal units were routed through the fractional
+feet/inches string builder, which produced a stray inches part and ignored
+DecimalPlaces.
+
+Fix:
+Add a dedicated decimal-imperial branch in helper.format_distance. It
+formats a single number with DecimalPlaces (default 3) and the ' or "
+symbol. Fractional, metric and area paths are unchanged.
+
+Before / after:
+  Length: <real length>   Unit: Feet - Decimal   DecimalPlaces: <n>
+  Before: <old text>
+  After : <new text>
+  (screenshot)
+
+Tested: Bonsai <version>, Blender <version>, viewport and SVG output.
